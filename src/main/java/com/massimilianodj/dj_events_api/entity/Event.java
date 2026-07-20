@@ -3,25 +3,26 @@ package com.massimilianodj.dj_events_api.entity;
 import java.time.LocalDate;
 
 public class Event {
+
     private Long id;
     private String title;
+    private String description;
+    private LocalDate date;
     private String venue;
     private String city;
-    private LocalDate date;
-    private String description;
-    private String imageUrl;
+    private String posterUrl;
 
     public Event() {
     }
 
-    public Event(Long id, String title, String venue, String city, LocalDate date, String description, String imageUrl) {
+    public Event(Long id, String title, String venue, String city, LocalDate date, String description, String posterUrl) {
         this.id = id;
         this.title = title;
         this.venue = venue;
         this.city = city;
         this.date = date;
         this.description = description;
-        this.imageUrl = imageUrl;
+        this.posterUrl = posterUrl;
     }
 
     public Long getId() {
@@ -73,10 +74,10 @@ public class Event {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return posterUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 }
