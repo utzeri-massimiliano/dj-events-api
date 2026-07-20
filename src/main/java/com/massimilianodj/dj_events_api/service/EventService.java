@@ -17,27 +17,6 @@ public class EventService {
     }
 
     public List<Event> getAllEvents() {
-        List<Event> events = new ArrayList<>();
-
-        events.add(new Event(
-                1L,
-                "Tomorrowland Belgium",
-                "The world's largest electronic music festival.",
-                LocalDate.of(2026, 7, 17),
-                "De Schorre",
-                "Boom",
-                "https://example.com/images/tomorrowland.jpg"
-        ));
-
-        events.add(new Event(
-                2L,
-                "Ultra Europe",
-                "One of Europe's biggest electronic music festivals.",
-                LocalDate.of(2026, 7, 10),
-                "Park Mladeži",
-                "Split",
-                "https://example.com/images/ultra-europe.jpg"
-        ));
-        return events;
+        return eventRepository.findAll();
     }
 }
