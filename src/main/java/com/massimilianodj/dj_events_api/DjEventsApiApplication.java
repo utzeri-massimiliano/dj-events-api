@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DjEventsApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DjEventsApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DjEventsApiApplication.class, args);
+    }
 
 }

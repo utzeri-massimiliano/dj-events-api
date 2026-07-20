@@ -1,27 +1,47 @@
 package com.massimilianodj.dj_events_api.entity;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "events")
 public class Event {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
     private String description;
+
     private LocalDate date;
+
     private String venue;
+
     private String city;
+
     private String posterUrl;
 
     public Event() {
     }
 
-    public Event(Long id, String title, String venue, String city, LocalDate date, String description, String posterUrl) {
-        this.id = id;
+    public Event(String title, String description, LocalDate date, String venue, String city, String posterUrl) {
         this.title = title;
+        this.description = description;
+        this.date = date;
         this.venue = venue;
         this.city = city;
-        this.date = date;
+        this.posterUrl = posterUrl;
+    }
+
+    public Event(Long id, String title, String description, LocalDate date, String venue, String city, String posterUrl) {
+        this.id = id;
+        this.title = title;
         this.description = description;
+        this.date = date;
+        this.venue = venue;
+        this.city = city;
         this.posterUrl = posterUrl;
     }
 
@@ -73,11 +93,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getImageUrl() {
+    public String getPosterUrl() {
         return posterUrl;
     }
 
-    public void setImageUrl(String posterUrl) {
+    public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
     }
 }
