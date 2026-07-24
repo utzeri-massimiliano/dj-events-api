@@ -1,13 +1,14 @@
 package com.massimilianodj.dj_events_api.controller;
 
-import com.massimilianodj.dj_events_api.entity.Event;
+import com.massimilianodj.dj_events_api.dto.EventDto;
 import com.massimilianodj.dj_events_api.service.EventService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller exposing endpoints for managing DJ events.
+ */
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -17,8 +18,18 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    /**
+     * Returns all available DJ events.
+     *
+     * @return list of events.
+     */
     @GetMapping
-    public List<Event> getAllEvents() {
+    public List<EventDto> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @GetMapping("/{id}")
+    public EventDto getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
     }
 }
