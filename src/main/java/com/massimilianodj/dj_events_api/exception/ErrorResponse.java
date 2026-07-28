@@ -1,6 +1,7 @@
 package com.massimilianodj.dj_events_api.exception;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * Represents the structure of an API error response.
@@ -12,6 +13,7 @@ public class ErrorResponse {
     private String error;
     private String message;
     private String path;
+    private Map<String, String> validationErrors;
 
     public ErrorResponse() {
     }
@@ -26,6 +28,23 @@ public class ErrorResponse {
         this.error = error;
         this.message = message;
         this.path = path;
+    }
+
+    public ErrorResponse(LocalDateTime timestamp, int status, String error, String message, String path, Map<String, String> validationErrors) {
+        this.timestamp = timestamp;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.path = path;
+        this.validationErrors = validationErrors;
+    }
+
+    public Map<String, String> getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(Map<String, String> validationErrors) {
+        this.validationErrors = validationErrors;
     }
 
     public LocalDateTime getTimestamp() {
