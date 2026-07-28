@@ -1,5 +1,6 @@
 package com.massimilianodj.dj_events_api.service;
 
+import com.massimilianodj.dj_events_api.dto.CreateEventDto;
 import com.massimilianodj.dj_events_api.dto.EventDto;
 import com.massimilianodj.dj_events_api.exception.EventNotFoundException;
 import com.massimilianodj.dj_events_api.mapper.EventMapper;
@@ -42,5 +43,18 @@ public class EventService {
     public EventDto getEventById(Long id) {
         return eventMapper.toDto(eventRepository.findById(id)
                 .orElseThrow(() -> new EventNotFoundException(id)));
+    }
+
+    /**
+     * Creates a DJ event
+     *
+     * @param createEventDto represents the event to be persisted
+     * @return event DTO
+     */
+    public EventDto createEvent(CreateEventDto createEventDto) {
+        return eventMapper.toDto(
+                eventRepository.save(
+                        eventMapper.toEntity(createEventDto))
+        );
     }
 }

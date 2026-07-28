@@ -1,7 +1,9 @@
 package com.massimilianodj.dj_events_api.controller;
 
+import com.massimilianodj.dj_events_api.dto.CreateEventDto;
 import com.massimilianodj.dj_events_api.dto.EventDto;
 import com.massimilianodj.dj_events_api.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +33,10 @@ public class EventController {
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable Long id) {
         return eventService.getEventById(id);
+    }
+
+    @PostMapping
+    public EventDto createEvent(@Valid @RequestBody CreateEventDto createEventDto) {
+        return eventService.createEvent(createEventDto);
     }
 }
