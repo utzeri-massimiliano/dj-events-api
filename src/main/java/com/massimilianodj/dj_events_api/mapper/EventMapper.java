@@ -4,6 +4,7 @@ import com.massimilianodj.dj_events_api.dto.CreateEventDto;
 import com.massimilianodj.dj_events_api.dto.EventDto;
 import com.massimilianodj.dj_events_api.entity.Event;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface EventMapper {
@@ -12,4 +13,7 @@ public interface EventMapper {
     Event toEntity(EventDto eventDto);
 
     Event toEntity(CreateEventDto createEventDto);
+
+    void updateEntity(CreateEventDto createEventDto,
+                      @MappingTarget Event event);
 }

@@ -4,6 +4,7 @@ import com.massimilianodj.dj_events_api.dto.CreateEventDto;
 import com.massimilianodj.dj_events_api.dto.EventDto;
 import com.massimilianodj.dj_events_api.service.EventService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,5 +39,16 @@ public class EventController {
     @PostMapping
     public EventDto createEvent(@Valid @RequestBody CreateEventDto createEventDto) {
         return eventService.createEvent(createEventDto);
+    }
+
+    @PutMapping("/{id}")
+    public EventDto updateEvent(@PathVariable Long id, @Valid @RequestBody CreateEventDto createEventDto) {
+        return eventService.updateEvent(id, createEventDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
     }
 }
