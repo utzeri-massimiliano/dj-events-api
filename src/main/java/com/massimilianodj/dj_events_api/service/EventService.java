@@ -2,6 +2,7 @@ package com.massimilianodj.dj_events_api.service;
 
 import com.massimilianodj.dj_events_api.dto.CreateEventDto;
 import com.massimilianodj.dj_events_api.dto.EventDto;
+import com.massimilianodj.dj_events_api.dto.UpdateEventDto;
 import com.massimilianodj.dj_events_api.entity.Event;
 import com.massimilianodj.dj_events_api.exception.EventNotFoundException;
 import com.massimilianodj.dj_events_api.mapper.EventMapper;
@@ -30,6 +31,18 @@ public class EventService {
      */
     public List<EventDto> getAllEvents() {
         return eventRepository.findAll().stream()
+                .map(eventMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all DJ events in a specific city.
+     *
+     * @param city city where the events take place
+     * @return list of event DTOs
+     */
+    public List<EventDto> getEventsByCity(String city) {
+        return eventRepository.findByCity(city).stream()
                 .map(eventMapper::toDto)
                 .toList();
     }
@@ -83,5 +96,19 @@ public class EventService {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new EventNotFoundException(id));
         eventRepository.delete(event);
+    }
+
+    /**
+     * Partially updates a DJ event by its identifier.
+     *
+     * @param id event identifier
+     * @return event DTO
+     * @throws EventNotFoundException if the event does not exist
+     */
+    public EventDto patchEvent(Long id, UpdateEventDto updateEventDto) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new EventNotFoundException(id));
+        eventMapper.patchEntity(updateEventDto, event);
+        return eventMapper.toDto(eventRepository.save(event));
     }
 }
