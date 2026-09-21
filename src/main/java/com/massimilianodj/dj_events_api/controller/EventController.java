@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,6 +51,16 @@ public class EventController {
     @GetMapping("/city/{city}")
     public List<EventDto> getEventsByCity(@PathVariable String city) {
         return eventService.getEventsByCity(city);
+    }
+
+    @GetMapping("/search")
+    public List<EventDto> getEventsByCityAndDate(@RequestParam String city, @RequestParam LocalDate date) {
+        return eventService.getEventsByCityAndDate(city, date);
+    }
+
+    @GetMapping("/search/{title}")
+    public List<EventDto> getEventsContainingTitle(@PathVariable String title) {
+        return eventService.getEventsByTitleContains(title);
     }
 
     @PatchMapping("/{id}")

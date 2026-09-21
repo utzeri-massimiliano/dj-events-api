@@ -9,6 +9,7 @@ import com.massimilianodj.dj_events_api.mapper.EventMapper;
 import com.massimilianodj.dj_events_api.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -43,6 +44,30 @@ public class EventService {
      */
     public List<EventDto> getEventsByCity(String city) {
         return eventRepository.findByCity(city).stream()
+                .map(eventMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all DJ events within a specific city and date.
+     *
+     * @param city city where the events take place
+     * @return list of event DTOs
+     */
+    public List<EventDto> getEventsByCityAndDate(String city, LocalDate date) {
+        return eventRepository.findByCityAndDate(city, date).stream()
+                .map(eventMapper::toDto)
+                .toList();
+    }
+
+    /**
+     * Retrieves all DJ events where the title matches the ìnput tile.
+     *
+     * @param title represents the event title
+     * @return list of event DTOs
+     */
+    public List<EventDto> getEventsByTitleContains(String title) {
+        return eventRepository.findByTitleContains(title).stream()
                 .map(eventMapper::toDto)
                 .toList();
     }
